@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>North Star API</title>
+    <link rel="shortcut icon" href="image.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            boxShadow: {
+              soft: "0 10px 30px rgba(15, 23, 42, 0.08)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      .code-scroll::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+      }
+      .code-scroll::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, 0.45);
+        border-radius: 999px;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <div class="min-h-screen">
+      <header class="border-b border-slate-200 bg-white/90 backdrop-blur sticky top-0 z-40">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="flex items-center justify-between py-4">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-white font-semibold">NS</div>
+              <div>
+                <p class="text-lg font-semibold tracking-tight">North Star API</p>
+                <p class="text-sm text-slate-500">REST API documentation</p>
+              </div>
+            </div>
+            <div class="hidden md:flex items-center gap-3 text-sm">
+              <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-emerald-700">v1</span>
+              <a
+                href="#quickstart"
+                class="rounded-xl border border-slate-300 px-4 py-2 font-medium text-slate-700 hover:bg-slate-100"
+                >Quickstart</a
+              >
+              <a
+                href="#endpoints"
+                class="rounded-xl bg-slate-900 px-4 py-2 font-medium text-white hover:bg-slate-800"
+                >Endpoints</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-7xl px-6 py-10 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[280px,minmax(0,1fr)]">
+          <aside class="lg:sticky lg:top-28 h-max">
+            <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-soft">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">On this page</p>
+              <nav class="mt-4 space-y-1 text-sm">
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#overview"
+                  >Overview</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#base-url"
+                  >Base URL</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#authentication"
+                  >Authentication</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#quickstart"
+                  >Quickstart</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#endpoints"
+                  >Endpoints</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#errors"
+                  >Errors</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#limits"
+                  >Rate limits and CORS</a
+                >
+                <a
+                  class="block rounded-xl px-3 py-2 text-slate-700 hover:bg-slate-100"
+                  href="#examples"
+                  >Code examples</a
+                >
+              </nav>
+            </div>
+          </aside>
+
+          <div class="space-y-8">
+            <section class="overflow-hidden rounded-[2rem] border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white shadow-soft">
+              <div class="grid gap-8 px-8 py-10 lg:grid-cols-[1.25fr,0.9fr] lg:px-10 lg:py-12">
+                <div>
+                  <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-slate-200">
+                    JSON only
+                    <span class="h-1 w-1 rounded-full bg-slate-400"></span>
+                    JWT auth
+                    <span class="h-1 w-1 rounded-full bg-slate-400"></span>
+                    CRUD notes
+                  </div>
+                  <h1 class="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">Simple, reliable API docs.</h1>
+                  <p class="mt-4 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+                    The North Star API is a lightweight REST API built with Express, JWT authentication, and Firestore. Each account has isolated note data, making it ideal for learning
+                    authentication, protected routes, and CRUD workflows using tools like Postman or fetch.
+                  </p>
+                  <div class="mt-7 flex flex-wrap gap-3">
+                    <a
+                      href="#quickstart"
+                      class="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100"
+                      >Start in 5 minutes</a
+                    >
+                    <a
+                      href="#examples"
+                      class="rounded-2xl border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                      >View examples</a
+                    >
+                  </div>
+                </div>
+                <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+                  <p class="text-sm font-semibold text-slate-200">API highlights</p>
+                  <div class="mt-4 grid gap-3">
+                    <div class="rounded-2xl border border-white/10 bg-black/10 p-4">
+                      <p class="text-sm font-medium text-white">Auth</p>
+                      <p class="mt-1 text-sm text-slate-300">Register, login, and inspect the current user with bearer tokens.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-black/10 p-4">
+                      <p class="text-sm font-medium text-white">Resource model</p>
+                      <p class="mt-1 text-sm text-slate-300">Each note is bound to a single user through <span class="font-mono text-slate-200">userId</span>.</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-black/10 p-4">
+                      <p class="text-sm font-medium text-white">Developer friendly</p>
+                      <p class="mt-1 text-sm text-slate-300">CORS enabled, JSON responses, clear status codes, and predictable errors.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="overview"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Overview</p>
+                  <h2 class="mt-2 text-3xl font-semibold tracking-tight">What this API provides</h2>
+                </div>
+                <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">REST</span>
+              </div>
+              <div class="mt-6 grid gap-4 md:grid-cols-3">
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Authentication</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">
+                    Use <span class="font-mono">/auth/register</span> and <span class="font-mono">/auth/login</span> to obtain a JWT. Send that token in the Authorization header for protected routes.
+                  </p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Notes CRUD</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Create, list, read, update, and delete notes using the <span class="font-mono">/notes</span> resource.</p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Scoped data</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Users only see their own records. Requests for another user’s note return not found.</p>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="base-url"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Base URL</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Environment endpoint</h2>
+              <div class="mt-6 grid gap-4 lg:grid-cols-1">
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Base URL:</p>
+                  <div class="mt-3 overflow-hidden rounded-2xl bg-slate-950 text-slate-100">
+                    <div class="code-scroll overflow-x-auto px-4 py-3 font-mono text-sm">https://north-star-b834.onrender.com</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="authentication"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Authentication</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Bearer token flow</h2>
+              <div class="mt-6 grid gap-4 lg:grid-cols-3">
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Step 1</div>
+                  <p class="mt-2 text-base font-semibold text-slate-900">Register or log in</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Call an auth endpoint with an email and password to receive a token.</p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Step 2</div>
+                  <p class="mt-2 text-base font-semibold text-slate-900">Store the token</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Copy the JWT returned by the API and store it in your client or API tool.</p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Step 3</div>
+                  <p class="mt-2 text-base font-semibold text-slate-900">Send Authorization header</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">Attach the token to protected requests using the standard bearer token format.</p>
+                </div>
+              </div>
+              <div class="mt-6 overflow-hidden rounded-3xl border border-slate-200">
+                <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-3">
+                  <p class="text-sm font-semibold text-slate-900">Authorization header</p>
+                  <button
+                    data-copy="auth-header"
+                    class="rounded-xl border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                  >
+                    Copy
+                  </button>
+                </div>
+                <pre
+                  id="auth-header"
+                  class="code-scroll overflow-x-auto bg-slate-950 px-5 py-4 text-sm text-slate-100"
+                ><code>Authorization: Bearer YOUR_JWT_TOKEN</code></pre>
+              </div>
+            </section>
+
+            <section
+              id="quickstart"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Quickstart</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Make your first successful request</h2>
+              <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <p class="text-sm font-semibold text-slate-900">1. Register</p>
+                  <div class="mt-4 overflow-hidden rounded-2xl bg-slate-950 text-slate-100">
+                    <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 text-xs uppercase tracking-[0.2em] text-slate-400">
+                      <span>POST /auth/register</span>
+                      <button
+                        data-copy="register-request"
+                        class="rounded-lg border border-slate-700 px-2.5 py-1 font-medium text-slate-200 hover:bg-slate-800"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                    <pre
+                      id="register-request"
+                      class="code-scroll overflow-x-auto px-4 py-4 text-sm"
+                    ><code>{
+  "email": "student@example.com",
+  "password": "password123"
+}</code></pre>
+                  </div>
+                </div>
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <p class="text-sm font-semibold text-slate-900">2. Use the returned token</p>
+                  <div class="mt-4 overflow-hidden rounded-2xl bg-slate-950 text-slate-100">
+                    <div class="flex items-center justify-between border-b border-slate-800 px-4 py-3 text-xs uppercase tracking-[0.2em] text-slate-400">
+                      <span>Response</span>
+                      <button
+                        data-copy="register-response"
+                        class="rounded-lg border border-slate-700 px-2.5 py-1 font-medium text-slate-200 hover:bg-slate-800"
+                      >
+                        Copy
+                      </button>
+                    </div>
+                    <pre
+                      id="register-response"
+                      class="code-scroll overflow-x-auto px-4 py-4 text-sm"
+                    ><code>{
+  "token": "&lt;jwt&gt;"
+}</code></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 rounded-3xl border border-emerald-200 bg-emerald-50 p-5">
+                <p class="text-sm font-semibold text-emerald-900">Recommended first workflow</p>
+                <p class="mt-2 text-sm leading-6 text-emerald-800">
+                  Register, call <span class="font-mono">GET /auth/me</span>, create a note with <span class="font-mono">POST /notes</span>, then verify it with
+                  <span class="font-mono">GET /notes</span>.
+                </p>
+              </div>
+            </section>
+
+            <section
+              id="endpoints"
+              class="space-y-6"
+            >
+              <div class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Endpoints</p>
+                <h2 class="mt-2 text-3xl font-semibold tracking-tight">Reference</h2>
+                <p class="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+                  All responses are JSON. Protected routes require a bearer token. Example request and response bodies are shown below each endpoint.
+                </p>
+              </div>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">POST</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/auth/register</h3>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Create a new user account and immediately return a JWT.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Request body</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "email": "student@example.com",
+  "password": "password123"
+}</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 201</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "token": "&lt;jwt&gt;"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">POST</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/auth/login</h3>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Verify credentials and return a JWT for the account.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Request body</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "email": "student@example.com",
+  "password": "password123"
+}</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "token": "&lt;jwt&gt;"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">GET</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/auth/me</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Return the currently authenticated user from the JWT payload.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Headers</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>Authorization: Bearer YOUR_JWT_TOKEN</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "id": "user_123",
+  "email": "student@example.com"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">GET</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/notes</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Return all notes that belong to the authenticated user.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Headers</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>Authorization: Bearer YOUR_JWT_TOKEN</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>[
+  {
+    "id": "note_123",
+    "userId": "user_123",
+    "title": "My first note",
+    "body": "Hello from the API",
+    "createdAt": "2026-03-10T20:00:00.000Z",
+    "updatedAt": "2026-03-10T20:00:00.000Z"
+  }
+]</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">POST</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/notes</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Create a new note for the authenticated user.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Request body</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "title": "My first note",
+  "body": "Hello from the API"
+}</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 201</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "id": "note_123",
+  "userId": "user_123",
+  "title": "My first note",
+  "body": "Hello from the API",
+  "createdAt": "2026-03-10T20:00:00.000Z",
+  "updatedAt": "2026-03-10T20:00:00.000Z"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">GET</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/notes/:id</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Return a single note by ID if it belongs to the authenticated user.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Path parameter</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>/notes/note_123</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "id": "note_123",
+  "userId": "user_123",
+  "title": "My first note",
+  "body": "Hello from the API",
+  "createdAt": "2026-03-10T20:00:00.000Z",
+  "updatedAt": "2026-03-10T20:00:00.000Z"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-amber-700">PUT</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/notes/:id</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Replace the note title and body.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Request body</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "title": "Updated note",
+  "body": "Updated body"
+}</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "id": "note_123",
+  "userId": "user_123",
+  "title": "Updated note",
+  "body": "Updated body",
+  "createdAt": "2026-03-10T20:00:00.000Z",
+  "updatedAt": "2026-03-10T20:05:00.000Z"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+
+              <article class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft">
+                <div class="flex flex-wrap items-center gap-3">
+                  <span class="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-rose-700">DELETE</span>
+                  <h3 class="text-2xl font-semibold tracking-tight">/notes/:id</h3>
+                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">Auth required</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Delete a note owned by the authenticated user.</p>
+                <div class="mt-6 grid gap-6 lg:grid-cols-2">
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Path parameter</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>/notes/note_123</code></pre>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">Response 200</p>
+                    <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "message": "Note deleted"
+}</code></pre>
+                  </div>
+                </div>
+              </article>
+            </section>
+
+            <section
+              id="errors"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Errors</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Error format and common status codes</h2>
+              <div class="mt-6 grid gap-4 lg:grid-cols-2">
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Standard error response</p>
+                  <pre class="code-scroll mt-3 overflow-x-auto rounded-2xl bg-slate-950 px-5 py-4 text-sm text-slate-100"><code>{
+  "error": "title and body are required"
+}</code></pre>
+                </div>
+                <div class="rounded-3xl border border-slate-200 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Common status codes</p>
+                  <div class="mt-3 space-y-3 text-sm text-slate-600">
+                    <div><span class="font-semibold text-slate-900">200</span> Successful read, update, or delete confirmation</div>
+                    <div><span class="font-semibold text-slate-900">201</span> Resource created successfully</div>
+                    <div><span class="font-semibold text-slate-900">400</span> Invalid request body or missing required fields</div>
+                    <div><span class="font-semibold text-slate-900">401</span> Missing, invalid, or expired bearer token</div>
+                    <div><span class="font-semibold text-slate-900">404</span> Route or note not found</div>
+                    <div><span class="font-semibold text-slate-900">429</span> Too many requests</div>
+                    <div><span class="font-semibold text-slate-900">500</span> Internal server error</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="limits"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Rate limits and CORS</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Operational behavior</h2>
+              <div class="mt-6 grid gap-4 lg:grid-cols-2">
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">Rate limiting</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">The API uses a simple request limiter to protect the service and demonstrate production-style request controls.</p>
+                </div>
+                <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold text-slate-900">CORS</p>
+                  <p class="mt-2 text-sm leading-6 text-slate-600">CORS is enabled so browser-based clients can call the API from a static site such as GitHub Pages.</p>
+                </div>
+              </div>
+            </section>
+
+            <section
+              id="examples"
+              class="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Code examples</p>
+              <h2 class="mt-2 text-3xl font-semibold tracking-tight">Use it from fetch or curl</h2>
+              <div class="mt-6 grid gap-6 xl:grid-cols-2">
+                <div class="overflow-hidden rounded-3xl border border-slate-200">
+                  <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-3">
+                    <p class="text-sm font-semibold text-slate-900">fetch example</p>
+                    <button
+                      data-copy="fetch-example"
+                      class="rounded-xl border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    id="fetch-example"
+                    class="code-scroll overflow-x-auto bg-slate-950 px-5 py-4 text-sm text-slate-100"
+                  ><code>const token = 'YOUR_JWT_TOKEN'
+const options = {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify({
+    title: 'My first note',
+    body: 'Hello from the API'
+  })
+}
+const response = await fetch('http://localhost:3000/notes', options)
+
+const data = await response.json()
+console.log(data)</code></pre>
+                </div>
+                <div class="overflow-hidden rounded-3xl border border-slate-200">
+                  <div class="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-3">
+                    <p class="text-sm font-semibold text-slate-900">curl example</p>
+                    <button
+                      data-copy="curl-example"
+                      class="rounded-xl border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    id="curl-example"
+                    class="code-scroll overflow-x-auto bg-slate-950 px-5 py-4 text-sm text-slate-100"
+                  ><code>curl -X POST http://localhost:3000/notes \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "My first note",
+    "body": "Hello from the API"
+  }'</code></pre>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div
+      id="toast"
+      class="pointer-events-none fixed bottom-6 right-6 translate-y-4 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-white opacity-0 shadow-soft transition duration-200"
+    >
+      Copied
+    </div>
+
+    <script>
+      const toast = document.getElementById("toast");
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.remove("opacity-0", "translate-y-4");
+        toast.classList.add("opacity-100", "translate-y-0");
+        clearTimeout(window.__toastTimer);
+        window.__toastTimer = setTimeout(() => {
+          toast.classList.add("opacity-0", "translate-y-4");
+          toast.classList.remove("opacity-100", "translate-y-0");
+        }, 1600);
+      }
+
+      async function copyText(id) {
+        const element = document.getElementById(id);
+        const value = element.innerText;
+        await navigator.clipboard.writeText(value);
+        showToast("Copied to clipboard");
+      }
+
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          try {
+            await copyText(button.getAttribute("data-copy"));
+          } catch (error) {
+            showToast("Copy failed");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

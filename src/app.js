@@ -26,7 +26,7 @@ app.use(apiLimiter);
 
 app.get("/", async (req, res) => {
   return res.status(200).json({
-    message: "Teaching Notes API is running",
+    message: "North Star is running",
     endpoints: {
       register: "POST /auth/register",
       login: "POST /auth/login",
